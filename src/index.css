@@ -1,0 +1,260 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/archivo/standard.css';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Archivo Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Grafiet: de donkere basis van het merk */
+  --color-ink-950: #08090a;
+  --color-ink-900: #0e1113;
+  --color-ink-850: #13171a;
+  --color-ink-800: #191e22;
+  --color-ink-700: #242a2f;
+  --color-ink-600: #333a41;
+  --color-ink-500: #4b535b;
+  --color-ink-400: #6c757e;
+  --color-ink-300: #99a1a9;
+  --color-ink-200: #c4c9ce;
+  --color-ink-100: #e4e7e9;
+
+  /* Zand: warme lichte vlakken */
+  --color-sand-50: #faf9f7;
+  --color-sand-100: #f3f1ed;
+  --color-sand-200: #e7e4dd;
+  --color-sand-300: #d6d2c9;
+  --color-sand-400: #b9b4a9;
+
+  /* Accent */
+  --color-volt: #c6f432;
+  --color-volt-soft: #e4fa9c;
+  --color-volt-deep: #a5d216;
+  --color-volt-ink: #1a2400;
+
+  --color-danger: #e5484d;
+  --color-danger-soft: #fdecec;
+  --color-warn: #f5a524;
+  --color-warn-soft: #fef4e0;
+  --color-ok: #2b9a66;
+  --color-ok-soft: #e6f6ee;
+  --color-info: #2f7cf6;
+  --color-info-soft: #e8f1fe;
+
+  --shadow-float: 0 1px 2px rgb(8 9 10 / 0.08), 0 8px 24px -6px rgb(8 9 10 / 0.18);
+  --shadow-card: 0 1px 2px rgb(8 9 10 / 0.05), 0 2px 8px -2px rgb(8 9 10 / 0.08);
+  --shadow-pop: 0 2px 6px rgb(8 9 10 / 0.1), 0 24px 60px -12px rgb(8 9 10 / 0.35);
+
+  --animate-rise: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade: fade 0.25s ease-out both;
+  --animate-sheet: sheet 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-pop: pop 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes sheet {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-ink-900);
+    background: var(--color-sand-100);
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  button,
+  [role='button'],
+  a,
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-volt);
+    color: var(--color-volt-ink);
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+@layer components {
+  /* Koppen in de merkstijl: breed, vet, strak gespatieerd */
+  .display {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Labels die door de 3D-weergave in de pagina worden gezet */
+  .scene-label {
+    white-space: nowrap;
+    font: 600 11px/1 var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink-800);
+    background: rgb(255 255 255 / 0.92);
+    border: 1px solid rgb(8 9 10 / 0.08);
+    box-shadow: var(--shadow-card);
+    padding: 5px 8px;
+    border-radius: 999px;
+    user-select: none;
+  }
+  .scene-label--item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    border-radius: 10px;
+    padding: 6px 10px;
+    background: var(--color-ink-900);
+    color: #fff;
+    border-color: transparent;
+  }
+  .scene-label--item strong {
+    font-weight: 600;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .scene-label--item span {
+    font-weight: 500;
+    color: var(--color-volt);
+  }
+
+  /* Achtergrond van de 3D-weergave: zachte studio-gradient */
+  .viewport-backdrop {
+    background:
+      radial-gradient(120% 90% at 50% 12%, #fbfaf8 0%, #ecebe6 45%, #d7d4cc 100%);
+  }
+  .hero-backdrop {
+    background:
+      radial-gradient(60% 55% at 72% 38%, rgb(198 244 50 / 0.13), transparent 70%),
+      radial-gradient(90% 80% at 80% 50%, #1b2126 0%, #0e1113 60%, #08090a 100%);
+  }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(80% 70% at 50% 40%, #000 30%, transparent 100%);
+  }
+
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-sand-300) transparent;
+  }
+  .scroll-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: var(--color-sand-300);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skeleton {
+    background: linear-gradient(100deg, var(--color-sand-200) 30%, var(--color-sand-100) 50%, var(--color-sand-200) 70%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
